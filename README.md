@@ -1,6 +1,6 @@
 # bloomsrv
 
-**Bloom Server** (`bloomsrv`) is a high-performance, asynchronous RESTful API service that provides access to in-memory [Bloom Filters](https://en.wikipedia.org/wiki/Bloom_filter) implemented in the `bloomlb` library.
+**Bloom Server** (`bloomsrv`) is a high-performance, asynchronous RESTful API service that provides access to in-memory [Bloom Filters](https://en.wikipedia.org/wiki/Bloom_filter) implemented in the [`bloomlb`](https://crates.io/crates/bloomlib) library.
 
 It allows clients to create, manage, and interact with probabilistic data structures over HTTP.
 This service is ideal for distributed systems that need a lightweight, fast, and space-efficient way to check for set membership (e.g., checking if a username is taken, URL caching, or deduping streams) without maintaining a local filter instance in every client.
@@ -53,14 +53,14 @@ It also contains unit tests (via doc-tests) to verify internal logic.
 
 This project relies on the robust Rust ecosystem for asynchronous networking and serialization.
 
-| Crate | Description                                                                                                  | Crate ([crates.io]((https://crates.io)))                                    | Documentation ([docs.rs](https://docs.rs/))  | Sources ([github.com](https://github.com))              |
-| :--- |:-------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------|:---------------------------------------------|:--------------------------------------------------------|
-| **Axum** | A modern, ergonomic web framework that routes HTTP requests to handlers.                                     | [`axum`](https://crates.io/crates/axum)                                     | [`axum`](https://docs.rs/axum)               | [`axum`](https://github.com/tokio-rs/axum)              |
-| **Parking_lot** | Provides smaller, faster, and more flexible synchronization primitives (`RwLock`) than the standard library. | [`parking_lot`](https://crates.io/crates/parking_lot)                       | [`parking_lot`](https://docs.rs/parking_lot) | [`parking_lot`](https://github.com/Amanieu/parking_lot) |
-| **Serde** | A framework for serializing and deserializing Rust data structures efficiently.                              | [`serde`](https://crates.io/crates/serde) |  [`serde`](https://docs.rs/serde)            | [`serde`](https://github.com/serde-rs/serde) |
-| **Tokio** | An asynchronous runtime providing the event loop and non-blocking I/O.                                       | [`tokio`](https://crates.io/crates/tokio)                                   | [`tokio`](https://docs.rs/tokio)             | [`tokio`](https://github.com/tokio-rs/tokio)            |
-| **Tower** | Used primarily in testing to invoke the service directly without a TCP socket.                               | [`tower`](https://crates.io/crates/tower)                                   | [`tower`](https://docs.rs/tower)             | [`tower`](https://github.com/tower-rs/tower)             |
-| **Uuid** | Generates unique 128-bit identifiers for every new filter created.                                           | [`uuid`](https://crates.io/crates/uuid)                                     | [`uuid`](https://docs.rs/uuid)               | [`uuid`](https://github.com/uuid-rs/uuid)                 |
+| Crate | Description                                                                                                  | [crates.io](https://crates.io)                                  | [docs.rs](https://docs.rs/)                          | [github.com](https://github.com)                                           |
+| :--- |:-------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|:-----------------------------------------------------|:---------------------------------------------------------------------------|
+| **Axum** | A modern, ergonomic web framework that routes HTTP requests to handlers.                                     | [`crates.io/axum`](https://crates.io/crates/axum)               | [`docs.rs/axum`](https://docs.rs/axum)               | [`github.com/tokio-rs/axum`](https://github.com/tokio-rs/axum)             |
+| **Parking_lot** | Provides smaller, faster, and more flexible synchronization primitives (`RwLock`) than the standard library. | [`crates.io/parking_lot`](https://crates.io/crates/parking_lot) | [`docs.rs/parking_lot`](https://docs.rs/parking_lot) | [`github.com/Amanieu/parking_lot`](https://github.com/Amanieu/parking_lot) |
+| **Serde** | A framework for serializing and deserializing Rust data structures efficiently.                              | [`crates.io/serde`](https://crates.io/crates/serde)             | [`docs.rs/serde`](https://docs.rs/serde)             | [`github.com/serde-rs`](https://github.com/serde-rs/serde)                 |
+| **Tokio** | An asynchronous runtime providing the event loop and non-blocking I/O.                                       | [`crates.io/tokio`](https://crates.io/crates/tokio)             | [`docs.rs/tokio`](https://docs.rs/tokio)             | [`github.com/tokio-rs`](https://github.com/tokio-rs/tokio)                 |
+| **Tower** | Used primarily in testing to invoke the service directly without a TCP socket.                               | [`crates.io/tower`](https://crates.io/crates/tower)             | [`docs.rs/tower`](https://docs.rs/tower)             | [`github.com/tower-rs`](https://github.com/tower-rs/tower)                 |
+| **Uuid** | Generates unique 128-bit identifiers for every new filter created.                                           | [`crates.io/uuid`](https://crates.io/crates/uuid)               | [`docs.rs/uuid`](https://docs.rs/uuid)               | [`github.com/uuid-rs`](https://github.com/uuid-rs/uuid)                    |
 
 ---
 
@@ -93,7 +93,7 @@ The application is structured as a **shared-state REST API**.
 
 ### Build
 
-Compile the project using `cargo`:
+Compile the project using `cargo`.
 
 ```bash
 cargo build
@@ -103,13 +103,13 @@ cargo build --release
 ### Test
 The project includes Unit Tests (via Doc-tests in `lib.rs`) and Integration Tests (`tests/api_tests.rs`).
 
-Run the full suite using `cargo`:
+Run the full suite using `cargo`.
 
 ```bash
 cargo test
 ```
 
-#### Example test output:
+_Example test output_
 
 ```
    Compiling bloomsrv v0.1.0 (/Users/waku/dev/bloom-service)
@@ -144,19 +144,21 @@ test src/lib.rs - create_app (line 102) ... ok
 
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.61s
 ```
-Note that there are no individual unit tests in the libary (`src/lib.rs`) and the entry point (`src/main.rs`) source files, hence the first two `runnin 0 tests` messages.
-Unit tests of the library are included within the doc-tests, hence the `running 3 tests` under `Doc-tests bloomsrv`
-Tests in `tests/api_tests.rs` exercise the full API through interacting with an actually running service.
+
+**Note**
+* There are no individual unit tests in the libary (`src/lib.rs`) and the entry point (`src/main.rs`) source files, hence the first two `runnin 0 tests` messages.
+* Unit tests of the library are included within the doc-tests, hence the `running 3 tests` message under `Doc-tests bloomsrv` section.
+* Tests in `tests/api_tests.rs` exercise the full API through interacting with an actually running service.
 
 ## Running the Service
 
-Start the server using `cargo`:
+Start the server using `cargo`.
 
 ```bash
 cargo run
 ```
 
-Output:
+_Example output_
 
 ```
 Bloom Daemon listening on [http://127.0.0.1:3000](http://127.0.0.1:3000)
@@ -171,18 +173,19 @@ The service listens on **port 3000** by default.
 At this time, the host anad port are fixed in the source code.
 Future versions may support dynamic configuration.
 
-In the examples below, we use the `curl` command-line utility for the requests.
-The `jq` command-line utility was used to pretty-print the received JSON responses.
+**Note**
+* The examples below use the `curl` command-line utility for the requests.
+* The `jq` command-line utility was used to pretty-print the received JSON responses.
 
 ```bash
 curl <request> | jq
 ```
 
-In all but the first example, the verbose output from curl is suppressed omitted (as if `curl` were called with the option `-s`).
+* In all but the first example, the verbose output from curl is omitted (as if `curl` were called with the option `-s`).
 
 ### Create a filter
 
-You can create a filter by specifying the estimated item count and either a target false positive rate or a fixed hash count.
+You can create a filter by specifying the estimated item count and _either_ a target false positive rate, _or_ a fixed hash count.
 
 **Request**
 
@@ -190,7 +193,7 @@ You can create a filter by specifying the estimated item count and either a targ
 |:--------------------|:-----------|
 | **Method**          | POST       |
 | **Endpoint**        | `/filters` |
-| **Body** (option 1) | `{ "name" : <filter name>, "item_count": <count>, "false_positive_rate": <rate> }` \
+| **Body** (option 1) | `{ "name" : <filter name>, "item_count": <count>, "false_positive_rate": <rate> }`
 | **Body** (option 2) | `{ "name" : <filter name>, "item_count": <count>, "hash_count": <count> }`
 
 _Example_
