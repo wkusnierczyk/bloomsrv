@@ -182,7 +182,9 @@ async fn filters_delete(
     if db.remove(&id_or_name).is_some() {
         return (
             StatusCode::OK,
-            Json(serde_json::json!({ "message": format!("Filter '{id_or_name}' has been deleted") })),
+            Json(
+                serde_json::json!({ "message": format!("Filter '{id_or_name}' has been deleted") }),
+            ),
         );
     }
     let key = db
@@ -233,7 +235,9 @@ async fn filter_insert(
         c.filter.insert(&item);
         (
             StatusCode::OK,
-            Json(serde_json::json!({ "response": format!("Item '{item}' inserted into filter '{name}'") })),
+            Json(
+                serde_json::json!({ "response": format!("Item '{item}' inserted into filter '{name}'") }),
+            ),
         )
     } else {
         (
@@ -254,22 +258,21 @@ async fn filter_lookup(
         (
             StatusCode::OK,
             Json(serde_json::json!(
-                {
-                    "contains": contains,
-                    "message": if contains {
-                        format!("Item '{item}' may have been seen by filter '{name}'")
-                    } else {
-                        format!("Item '{item}' cannot have been seen by filter '{name}'")
-                    }})),
+            {
+                "contains": contains,
+                "message": if contains {
+                    format!("Item '{item}' may have been seen by filter '{name}'")
+                } else {
+                    format!("Item '{item}' cannot have been seen by filter '{name}'")
+                }})),
         )
     } else {
         (
             StatusCode::NOT_FOUND,
-            Json(serde_json::json!({ "error": format!("Filter '{name}' not found") })).into(),
+            Json(serde_json::json!({ "error": format!("Filter '{name}' not found") })),
         )
     }
 }
-
 
 async fn filter_clear(
     Path(name): Path<String>,

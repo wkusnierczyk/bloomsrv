@@ -98,7 +98,7 @@ async fn test_full_filter_lifecycle() {
     // 3. LOOKUP (Should be empty/false)
     let req = Request::builder()
         .method("GET")
-        .uri("/filters/login_attempts/lookup")
+        .uri("/filters/login_attempts/items")
         .body(Body::from("user_123")) // Body acts as the item
         .unwrap();
 
@@ -110,7 +110,7 @@ async fn test_full_filter_lifecycle() {
     // 4. INSERT item
     let req = Request::builder()
         .method("POST")
-        .uri("/filters/login_attempts/insert")
+        .uri("/filters/login_attempts/items")
         .body(Body::from("user_123"))
         .unwrap();
 
@@ -120,7 +120,7 @@ async fn test_full_filter_lifecycle() {
     // 5. LOOKUP (Should be true)
     let req = Request::builder()
         .method("GET")
-        .uri("/filters/login_attempts/lookup")
+        .uri("/filters/login_attempts/items")
         .body(Body::from("user_123"))
         .unwrap();
 
@@ -141,7 +141,7 @@ async fn test_full_filter_lifecycle() {
     // 7. LOOKUP (Should be false again)
     let req = Request::builder()
         .method("GET")
-        .uri("/filters/login_attempts/lookup")
+        .uri("/filters/login_attempts/items")
         .body(Body::from("user_123"))
         .unwrap();
 
