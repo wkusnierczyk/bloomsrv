@@ -13,6 +13,7 @@ This service is ideal for distributed systems that need a lightweight, fast, and
 - [Building and Testing](#building-and-testing)
 - [Running the Service](#running-the-service)
 - [API Usage Guide](#api-usage-guide)
+- [Docker](#docker)
 
 ---
 
@@ -155,6 +156,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 Start the server using `cargo`.
 
 ```bash
+# Run from sources
 cargo run
 ```
 
@@ -163,6 +165,34 @@ _Example output_
 ```
 Bloom Daemon listening on [http://127.0.0.1:3000](http://127.0.0.1:3000)
 ```
+
+To download from crates.io and run the binary without building from local sources, use `cargo install`.
+
+```bash
+# Specify installation path
+BIN_PATH=/usr/local 
+
+# Install binary to specified path
+cargo install bloomsrv --root "${BIN_PATH}"
+
+# Run the installed service in the background
+bloomsrv &
+```
+
+**Note** 
+* By default, `bloomsrv` listens on `127.0.0.1:3000`.
+* The `--host` and `--port` options allow to specify a different host and port.
+* Alternatively, the `BLOOMSRV_HOST` and `BLOOMSRV_PORT` environment variables can be used.
+
+```bash
+# Specify host and port via command line options
+bloomsrv --host <host> --port <port>
+
+# Specify host and port via environment variables
+BLOOMSRV_HOST=<host> BLOOMSRV_PORT=<port> bloomsrv
+```
+
+In the documentation below, the service is run with the default host and port.
 
 ---
 
@@ -468,3 +498,9 @@ _Example_
   "message": "Filter 'login_attempts' has been deleted"
 }
 ```
+
+## Docker
+
+The `docker/` subdirectory provides code to build a Docker image encapsulating the service.
+The compiled image is available from Docker Hub as [`wkusnierczyk/bloomsrv`](https://hub.docker.com/r/wkusnierczyk/bloomsrv).
+See `docker/README.md` for more details.

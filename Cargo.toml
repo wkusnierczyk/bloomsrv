@@ -1,6 +1,6 @@
 [package]
 name = "bloomsrv"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "A REST API service exposing space and time efficient Bloom Filter implementation in Rust."
 authors = ["Waclaw Kusnierczyk <wacus@pm.me>"]
@@ -32,6 +32,7 @@ uuid = { version = "1.0", features = ["v4", "serde"] }
 
 # Parking Lot provides faster, smaller locks than the standard library
 parking_lot = "0.12"
+clap = { version = "4.5.53", features = ["derive", "env"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
