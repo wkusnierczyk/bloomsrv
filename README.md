@@ -164,6 +164,31 @@ _Example output_
 Bloom Daemon listening on [http://127.0.0.1:3000](http://127.0.0.1:3000)
 ```
 
+To download from crates.io and run the binary without building from local sources, use `cargo install`.
+
+```bash
+# Specify installation path
+BIN_PATH=/usr/local 
+
+cargo install bloomsrv --root "${BIN_PATH}"
+
+```
+
+**Note** 
+* By default, `bloomsrv` listens on `127.0.0.1:3000`.
+* The `--host` and `--port` options allow to specify a different host and port.
+* Alternatively, the `BLOOMSRV_HOST` and `BLOOMSRV_PORT` environment variables can be used.
+
+```bash
+# Specify host and port via command line options
+bloomsrv --host <host> --port <port>
+
+# Specify host and port via environment variables
+BLOOMSRV_HOST=<host> BLOOMSRV_PORT=<port> bloomsrv
+```
+
+In the documentation below, the service is run with the default host and port.
+
 ---
 
 ## API Usage Guide
