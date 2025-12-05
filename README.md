@@ -155,6 +155,7 @@ test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 Start the server using `cargo`.
 
 ```bash
+# Run from sources
 cargo run
 ```
 
@@ -170,8 +171,11 @@ To download from crates.io and run the binary without building from local source
 # Specify installation path
 BIN_PATH=/usr/local 
 
+# Install binary to specified path
 cargo install bloomsrv --root "${BIN_PATH}"
 
+# Run the installed service in the background
+bloomsrv &
 ```
 
 **Note** 
